@@ -34,8 +34,11 @@ let rule = {
 
         // one argument
         if ( node.arguments.length == 1 ) {
-          // console.log(node.arguments[ lastArgIndex ]);
-          if ( firstArgToken.type == 'String' || firstArg.type == 'ArrayExpression' ) {
+          // console.log(firstArg.type);
+          let isString = firstArgToken.type == 'String';
+          let isArray = firstArg.type == 'ArrayExpression';
+          let isObject = firstArg.type == 'ObjectExpression';
+          if ( isString || isArray || isObject ) {
             if ( hasOpeningSpace ) {
               context.report({
                 node: node,
@@ -53,6 +56,28 @@ let rule = {
                 messageId: 'rejectedClosingSpace',
                 fix: function( fixer ) {
                   return fixer.removeRange([ lastArgToken.range[1], closeParen.range[0] ]);
+                }
+              });
+            }
+          } else {
+            // single non-string/array/object argument, needs spaces
+            if ( !hasOpeningSpace ) {
+              context.report({
+                node: node,
+                loc: openParen.loc,
+                messageId: "missingOpeningSpace",
+                fix: function( fixer ) {
+                  return fixer.insertTextAfter(openParen, ' ');
+                }
+              });
+            }
+            if ( !hasClosingSpace ) {
+              context.report({
+                node: node,
+                loc: closeParen.loc,
+                messageId: "missingClosingSpace",
+                fix: function( fixer ) {
+                  return fixer.insertTextAfter(lastArgToken, ' ');
                 }
               });
             }
@@ -94,6 +119,9 @@ tester.run('spaces-in-parens-fizzy', rule, {
     { code: 'getItem(\na, b\n)' },
     { code: 'getItem("hydrogen")' },
     { code: 'getItem([ x, y ])' },
+    { code: 'getItem({ bloodType: "AB Positive" })' },
+    { code: 'getItem({\nbloodType: "AB Positive"\n})' },
+    { code: 'getItem( element )' },
   ],
   invalid: [
     {
@@ -115,6 +143,20 @@ tester.run('spaces-in-parens-fizzy', rule, {
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
         { messageId: "rejectedClosingSpace", line: 1, column: 19 },
+      ]
+    },
+    {
+      code: 'getItem( { bloodType: "AB Positive" } )',
+      errors: [
+        { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
+        { messageId: "rejectedClosingSpace", line: 1, column: 39 },
+      ]
+    },
+    {
+      code: 'getItem(element)',
+      errors: [
+        { messageId: "missingOpeningSpace", line: 1, column: 8 },
+        { messageId: "missingClosingSpace", line: 1, column: 16 },
       ]
     },
   ],
