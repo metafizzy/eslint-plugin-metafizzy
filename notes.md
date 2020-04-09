@@ -1,17 +1,3 @@
-ArrowFunctionExpression
-FunctionDeclaration
-WhileStatement
-ForStatement
-ForInStatement
-TryStatement
-SwitchStatement
-IfStatement
-
-
-## Program
-
-All parens get spaces except...
-
-    ("string")
-    ({ singleObject: value })
-    ([ single, array ])
+<!-- computed-property-spacing -->
+<!-- "space-in-parens" -->
+"space-infix-ops"

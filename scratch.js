@@ -2,14 +2,8 @@ const { RuleTester } = require('eslint');
 
 function create( context ) {
   return {
-    Program: function( node ) {
-      // console.log( node );
-      console.log(node.tokens);
-      node.tokens.forEach( function( token ) {
-        if ( token.value && token.value == '(' ) {
-          // console.log(token.parent);
-        }
-      })
+    MemberExpression: function( node ) {
+      console.log( node.property );
     }
   };
 }
@@ -41,7 +35,7 @@ tester.run( 'scratch', rule, {
   valid: [
     // { code: 'function getItem( hydrogen ) {}' },
     // { code: 'getItem([ a, b ])' },
-    { code: 'getItem({ bloodType: "AB Positive" })' },
+    { code: 'items[ indicies[last] ]' },
   ],
   invalid: [],
 } );

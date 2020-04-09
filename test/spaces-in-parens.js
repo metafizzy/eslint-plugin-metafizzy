@@ -12,11 +12,15 @@ tester.run( 'spaces-in-parens-fizzy', rule, {
     { code: 'getItem([ x, y ])' },
     { code: 'getItem({ bloodType: "AB Positive" })' },
     { code: 'getItem({\nbloodType: "AB Positive"\n})' },
-    // { code: 'getItem( a, b )' },
-    // { code: 'getItem(\na, b\n)' },
-    // { code: 'getItem( element )' },
-    // { code: 'new Item( a, b )' },
-    // { code: 'new Item( element )' },
+
+    { code: 'getItem( a, b )' },
+    { code: 'getItem(\na, b\n)' },
+    { code: 'getItem( element )' },
+    { code: 'new Item( a, b )' },
+    { code: 'new Item( element )' },
+    { code: 'getItem( [ x, y ], [ u, v ] )' },
+
+    { code: '( 1 + 2 )' },
   ],
   invalid: [
     {
@@ -53,26 +57,40 @@ tester.run( 'spaces-in-parens-fizzy', rule, {
         { messageId: "rejectedClosingSpace", line: 1, column: 39 },
       ]
     },
-    // {
-    //   code: 'getItem(a, b)',
-    //   errors: [
-    //     { messageId: "missingOpeningSpace", line: 1, column: 8 },
-    //     { messageId: "missingClosingSpace", line: 1, column: 13 },
-    //   ]
-    // },
-    // {
-    //   code: 'new Item(a, b)',
-    //   errors: [
-    //     { messageId: "missingOpeningSpace", line: 1, column: 9 },
-    //     { messageId: "missingClosingSpace", line: 1, column: 14 },
-    //   ]
-    // },
-    // {
-    //   code: 'getItem(element)',
-    //   errors: [
-    //     { messageId: "missingOpeningSpace", line: 1, column: 8 },
-    //     { messageId: "missingClosingSpace", line: 1, column: 16 },
-    //   ]
-    // },
+    {
+      code: 'getItem(a, b)',
+      errors: [
+        { messageId: "missingOpeningSpace", line: 1, column: 8 },
+        { messageId: "missingClosingSpace", line: 1, column: 13 },
+      ]
+    },
+    {
+      code: 'new Item(a, b)',
+      errors: [
+        { messageId: "missingOpeningSpace", line: 1, column: 9 },
+        { messageId: "missingClosingSpace", line: 1, column: 14 },
+      ]
+    },
+    {
+      code: 'getItem(element)',
+      errors: [
+        { messageId: "missingOpeningSpace", line: 1, column: 8 },
+        { messageId: "missingClosingSpace", line: 1, column: 16 },
+      ]
+    },
+    {
+      code: 'getItem([ x, y ], [ u, w ])',
+      errors: [
+        { messageId: "missingOpeningSpace", line: 1, column: 8 },
+        { messageId: "missingClosingSpace", line: 1, column: 27 },
+      ]
+    },
+    {
+      code: '(1 + 2)',
+      errors: [
+        { messageId: "missingOpeningSpace", line: 1, column: 1 },
+        { messageId: "missingClosingSpace", line: 1, column: 7 },
+      ]
+    },
   ],
 } );

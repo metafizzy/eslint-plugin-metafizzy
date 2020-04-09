@@ -45,9 +45,13 @@ function create( context ) {
         isSingleBracer = sourceCode.getTokenAfter( closingBrace ) == closeParen;
       }
 
+      let hasOpeningSpace = sourceCode.isSpaceBetweenTokens( openParen, nextToken );
+      let hasClosingSpace = sourceCode.isSpaceBetweenTokens(
+          penultimateToken, closeParen );
+
       // check for single string next
       if ( isSingleString || isSingleBracer ) {
-        let hasOpeningSpace = sourceCode.isSpaceBetweenTokens( openParen, nextToken );
+        // single string, array or object rejects spaces
         if ( hasOpeningSpace ) {
           context.report({
             node: node,
@@ -59,8 +63,6 @@ function create( context ) {
           });
         }
 
-        let hasClosingSpace = sourceCode.isSpaceBetweenTokens(
-            penultimateToken, closeParen );
         if ( hasClosingSpace ) {
           context.report({
             node: node,
@@ -72,6 +74,28 @@ function create( context ) {
           });
         }
         return;
+      } else {
+        // everything else require spaces
+        if ( !hasOpeningSpace ) {
+          context.report({
+            node: node,
+            loc: openParen.loc,
+            messageId: "missingOpeningSpace",
+            fix: function( fixer ) {
+              return fixer.insertTextAfter( openParen, ' ' );
+            }
+          });
+        }
+        if ( !hasClosingSpace ) {
+          context.report({
+            node: node,
+            loc: closeParen.loc,
+            messageId: "missingClosingSpace",
+            fix: function( fixer ) {
+              return fixer.insertTextAfter( penultimateToken, ' ');
+            }
+          });
+        }
       }
 
     });
