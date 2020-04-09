@@ -4,9 +4,10 @@ function create( context ) {
   return {
     Program: function( node ) {
       // console.log( node );
+      console.log(node.tokens);
       node.tokens.forEach( function( token ) {
         if ( token.value && token.value == '(' ) {
-          console.log(token.parent);
+          // console.log(token.parent);
         }
       })
     }
@@ -39,7 +40,8 @@ let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
     // { code: 'function getItem( hydrogen ) {}' },
-    { code: 'getItem([ a, b ])' },
+    // { code: 'getItem([ a, b ])' },
+    { code: 'getItem({ bloodType: "AB Positive" })' },
   ],
   invalid: [],
 } );
