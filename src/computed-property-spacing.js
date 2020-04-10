@@ -80,7 +80,6 @@ module.exports = {
     docs: {
       description: 'spacing inside computed property brackets',
       category: 'Stylistic Issues',
-      recommended: false,
     },
 
     messages: {

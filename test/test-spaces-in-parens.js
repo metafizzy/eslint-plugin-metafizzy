@@ -1,10 +1,10 @@
 const { RuleTester } = require('eslint');
 
-const rule = require('../src/program-parens.js');
+const rule = require('../src/spaces-in-parens.js');
 
 let tester = new RuleTester();
 
-tester.run( 'spaces-in-parens-fizzy', rule, {
+tester.run( 'spaces-in-parens', rule, {
   valid: [
     { code: 'getItem()' },
     { code: 'getItem("hydrogen")' },

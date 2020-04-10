@@ -2,8 +2,8 @@ const { RuleTester } = require('eslint');
 
 function create( context ) {
   return {
-    MemberExpression: function( node ) {
-      console.log( node.property );
+    BinaryExpression: function( node ) {
+      console.log( node.left.type );
     }
   };
 }
@@ -33,9 +33,12 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    // { code: 'function getItem( hydrogen ) {}' },
-    // { code: 'getItem([ a, b ])' },
-    { code: 'items[ indicies[last] ]' },
+    'Math.PI/4',
+    '1/4',
+    'TAU/4',
+    'new Date()/4',
+    'getItem()/4',
+    'items[0]/4',
   ],
   invalid: [],
 } );

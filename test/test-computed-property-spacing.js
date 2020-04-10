@@ -1,6 +1,6 @@
 const { RuleTester } = require('eslint');
 
-const rule = require('../src/property-spacing.js');
+const rule = require('../src/computed-property-spacing.js');
 
 let tester = new RuleTester();
 
