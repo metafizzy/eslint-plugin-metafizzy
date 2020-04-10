@@ -2,11 +2,10 @@ function create( context ) {
 
   let sourceCode = context.getSourceCode();
 
-  function checkBinary( node ) {
-
-    let operator = sourceCode.getFirstTokenBetween( node.left, node.right,
+  function checkOperator( node, leftNode, operatorValue, rightNode ) {
+    let operator = sourceCode.getFirstTokenBetween( leftNode, rightNode,
       function( token ) {
-        return token.value === node.operator;
+        return token.value == operatorValue;
       }
     );
 
@@ -15,26 +14,31 @@ function create( context ) {
     let hasSpaceBefore = sourceCode.isSpaceBetweenTokens( before, operator );
     let hasSpaceAfter = sourceCode.isSpaceBetweenTokens( operator, after );
 
-    let isMultiplyDivide = [ '/', '*' ].includes( node.operator );
-    let isSingularMultiplyDivide = node.type == 'BinaryExpression' && isMultiplyDivide &&
-      getIsSingular( node.left ) && getIsSingular( node.right );
+    let isMultiplyDivide = node.type == 'BinaryExpression' &&
+      [ '/', '*' ].includes( operatorValue );
+    let isSingularMultiplyDivide =  isMultiplyDivide && getIsSingular( leftNode ) &&
+      getIsSingular( rightNode );
+
+    function report( options ) {
+      context.report( Object.assign( {
+        node: node,
+        data: { operator: operatorValue },
+        loc: operator.loc,
+      }, options ) );
+    }
 
     if ( isSingularMultiplyDivide ) {
       if ( hasSpaceBefore ) {
-        context.report({
-          node: node,
-          loc: operator.loc,
-          messageId: 'rejectedBeforeSpace',
+        report({
+          messageId: 'unexpectedSpaceBefore',
           fix: function( fixer ) {
             return fixer.removeRange([ before.range[1], operator.range[0] ]);
           }
         });
       }
       if ( hasSpaceAfter ) {
-        context.report({
-          node: node,
-          loc: operator.loc,
-          messageId: 'rejectedAfterSpace',
+        report({
+          messageId: 'unexpectedSpaceAfter',
           fix: function( fixer ) {
             return fixer.removeRange([ operator.range[1], after.range[0] ]);
           }
@@ -43,20 +47,16 @@ function create( context ) {
     } else {
       // everything else require spaces
       if ( !hasSpaceBefore ) {
-        context.report({
-          node: node,
-          loc: operator.loc,
-          messageId: 'missingBeforeSpace',
+        report({
+          messageId: 'missingSpaceBefore',
           fix: function( fixer ) {
             return fixer.insertTextBefore( operator, ' ' );
           }
         });
       }
       if ( !hasSpaceAfter ) {
-        context.report({
-          node: node,
-          loc: operator.loc,
-          messageId: 'missingAfterSpace',
+        report({
+          messageId: 'missingSpaceAfter',
           fix: function( fixer ) {
             return fixer.insertTextAfter( operator, ' ' );
           }
@@ -67,13 +67,32 @@ function create( context ) {
 
   }
 
+  function checkBinary( node ) {
+    checkOperator( node, node.left, node.operator, node.right );
+  }
+
+  function checkVar( node ) {
+    let leftNode = node.id.typeAnnotation || node.id;
+    checkOperator( node, leftNode, '=', node.init );
+  }
+
+  function checkTernary( node ) {
+    checkOperator( node, node.test, '?', node.consequent );
+    checkOperator( node, node.consequent, ':', node.alternate );
+  }
+
+  function checkAssignmentPattern( node ) {
+    let leftNode = node.left.typeAnnotation || node.left;
+    checkOperator( node, leftNode, '=', node.right );
+  }
+
   return {
     BinaryExpression: checkBinary,
-    AssignmentExpression: checkBinary,
     LogicalExpression: checkBinary,
-    // AssignmentPattern: checkAssignment,
-    // ConditionalExpression: checkConditional,
-    // VariableDeclarator: checkVar
+    VariableDeclarator: checkVar,
+    AssignmentExpression: checkBinary,
+    ConditionalExpression: checkTernary,
+    AssignmentPattern: checkAssignmentPattern,
   };
 }
 
@@ -92,12 +111,10 @@ module.exports = {
     },
 
     messages: {
-      missingSpace: 'Operator must be spaced.',
-      rejectedSpace: 'Operator must not be spaced.',
-      missingBeforeSpace: 'There must be a space after the operator.',
-      missingAfterSpace: 'There must be a space before the operator.',
-      rejectedBeforeSpace: 'There should be no space before the operator.',
-      rejectedAfterSpace: 'There should be no space before the operator.'
+      missingSpaceBefore: 'Space missing before `{{operator}}`',
+      missingSpaceAfter: 'Space missing after `{{operator}}`',
+      unexpectedSpaceBefore: 'Unexpected space before `{{operator}}`',
+      unexpectedSpaceAfter: 'Unexpected space after `{{operator}}`'
     },
   },
 

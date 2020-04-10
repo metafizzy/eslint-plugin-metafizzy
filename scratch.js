@@ -2,8 +2,8 @@ const { RuleTester } = require('eslint');
 
 function create( context ) {
   return {
-    BinaryExpression: function( node ) {
-      console.log( node.left.type );
+    VariableDeclarator: function( node ) {
+      console.log( node );
     }
   };
 }
@@ -33,12 +33,7 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    'Math.PI/4',
-    '1/4',
-    'TAU/4',
-    'new Date()/4',
-    'getItem()/4',
-    'items[0]/4',
+    'var a = b'
   ],
   invalid: [],
 } );
