@@ -25,12 +25,14 @@ tester.run( 'spaces-in-parens', rule, {
   invalid: [
     {
       code: 'getItem( )',
+      output: 'getItem()',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
       ]
     },
     {
       code: 'getItem( "hydrogen" )',
+      output: 'getItem("hydrogen")',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
         { messageId: "rejectedClosingSpace", line: 1, column: 21 },
@@ -38,6 +40,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'new Item( "hydrogen" )',
+      output: 'new Item("hydrogen")',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 9 },
         { messageId: "rejectedClosingSpace", line: 1, column: 22 },
@@ -45,6 +48,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'getItem( [ x, y ] )',
+      output: 'getItem([ x, y ])',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
         { messageId: "rejectedClosingSpace", line: 1, column: 19 },
@@ -52,6 +56,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'getItem( { bloodType: "AB Positive" } )',
+      output: 'getItem({ bloodType: "AB Positive" })',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
         { messageId: "rejectedClosingSpace", line: 1, column: 39 },
@@ -59,6 +64,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'getItem(a, b)',
+      output: 'getItem( a, b )',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 8 },
         { messageId: "missingClosingSpace", line: 1, column: 13 },
@@ -66,6 +72,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'new Item(a, b)',
+      output: 'new Item( a, b )',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 9 },
         { messageId: "missingClosingSpace", line: 1, column: 14 },
@@ -73,6 +80,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'getItem(element)',
+      output: 'getItem( element )',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 8 },
         { messageId: "missingClosingSpace", line: 1, column: 16 },
@@ -80,6 +88,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: 'getItem([ x, y ], [ u, w ])',
+      output: 'getItem( [ x, y ], [ u, w ] )',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 8 },
         { messageId: "missingClosingSpace", line: 1, column: 27 },
@@ -87,6 +96,7 @@ tester.run( 'spaces-in-parens', rule, {
     },
     {
       code: '(1 + 2)',
+      output: '( 1 + 2 )',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 1 },
         { messageId: "missingClosingSpace", line: 1, column: 7 },

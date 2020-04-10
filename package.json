@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "eslint": "^6.8.0",
-    "eslint-plugin-space-in-parens-plus": "0.0.1",
     "jshint": "^2.11.0"
   }
 }

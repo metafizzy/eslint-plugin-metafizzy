@@ -18,6 +18,7 @@ tester.run( 'computed-property-spacing', rule, {
   invalid: [
     {
       code: 'items[ "hydrogen" ]',
+      output: 'items["hydrogen"]',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 6 },
         { messageId: "rejectedClosingSpace", line: 1, column: 19 },
@@ -25,6 +26,7 @@ tester.run( 'computed-property-spacing', rule, {
     },
     {
       code: 'items[ 1 ]',
+      output: 'items[1]',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 6 },
         { messageId: "rejectedClosingSpace", line: 1, column: 10 },
@@ -32,6 +34,7 @@ tester.run( 'computed-property-spacing', rule, {
     },
     {
       code: 'items[ i ]',
+      output: 'items[i]',
       errors: [
         { messageId: "rejectedOpeningSpace", line: 1, column: 6 },
         { messageId: "rejectedClosingSpace", line: 1, column: 10 },
@@ -39,6 +42,7 @@ tester.run( 'computed-property-spacing', rule, {
     },
     {
       code: 'items[index]',
+      output: 'items[ index ]',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 6 },
         { messageId: "missingClosingSpace", line: 1, column: 12 },
@@ -46,6 +50,7 @@ tester.run( 'computed-property-spacing', rule, {
     },
     {
       code: 'items[10 + 4]',
+      output: 'items[ 10 + 4 ]',
       errors: [
         { messageId: "missingOpeningSpace", line: 1, column: 6 },
         { messageId: "missingClosingSpace", line: 1, column: 13 },
