@@ -24,7 +24,7 @@ function create( context ) {
           messageId: 'rejectedOpeningSpace',
           fix: function( fixer ) {
             return fixer.removeRange([ openBracket.range[1], property.range[0] ]);
-          }
+          },
         });
       }
       if ( hasClosingSpace ) {
@@ -34,9 +34,9 @@ function create( context ) {
           messageId: 'rejectedClosingSpace',
           fix: function( fixer ) {
             return fixer.removeRange([ property.range[1], closeBracket.range[0] ]);
-          }
+          },
         });
-      } 
+      }
     } else {
       // everything else require spaces
       if ( !hasOpeningSpace ) {
@@ -46,7 +46,7 @@ function create( context ) {
           messageId: 'missingOpeningSpace',
           fix: function( fixer ) {
             return fixer.insertTextAfter( openBracket, ' ' );
-          }
+          },
         });
       }
       if ( !hasClosingSpace ) {
@@ -56,7 +56,7 @@ function create( context ) {
           messageId: 'missingClosingSpace',
           fix: function( fixer ) {
             return fixer.insertTextBefore( closeBracket, ' ' );
-          }
+          },
         });
       }
     }
@@ -86,7 +86,7 @@ module.exports = {
       missingOpeningSpace: 'There must be a space after this bracket.',
       missingClosingSpace: 'There must be a space before this bracket.',
       rejectedOpeningSpace: 'There should be no space after this bracket.',
-      rejectedClosingSpace: 'There should be no space before this bracket.'
+      rejectedClosingSpace: 'There should be no space before this bracket.',
     },
   },
 

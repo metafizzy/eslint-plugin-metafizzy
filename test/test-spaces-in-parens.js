@@ -27,80 +27,80 @@ tester.run( 'spaces-in-parens', rule, {
       code: 'getItem( )',
       output: 'getItem()',
       errors: [
-        { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
-      ]
+        { messageId: 'rejectedOpeningSpace', column: 8 },
+      ],
     },
     {
       code: 'getItem( "hydrogen" )',
       output: 'getItem("hydrogen")',
       errors: [
-        { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
-        { messageId: "rejectedClosingSpace", line: 1, column: 21 },
-      ]
+        { messageId: 'rejectedOpeningSpace', column: 8 },
+        { messageId: 'rejectedClosingSpace', column: 21 },
+      ],
     },
     {
       code: 'new Item( "hydrogen" )',
       output: 'new Item("hydrogen")',
       errors: [
-        { messageId: "rejectedOpeningSpace", line: 1, column: 9 },
-        { messageId: "rejectedClosingSpace", line: 1, column: 22 },
-      ]
+        { messageId: 'rejectedOpeningSpace', column: 9 },
+        { messageId: 'rejectedClosingSpace', column: 22 },
+      ],
     },
     {
       code: 'getItem( [ x, y ] )',
       output: 'getItem([ x, y ])',
       errors: [
-        { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
-        { messageId: "rejectedClosingSpace", line: 1, column: 19 },
-      ]
+        { messageId: 'rejectedOpeningSpace', column: 8 },
+        { messageId: 'rejectedClosingSpace', column: 19 },
+      ],
     },
     {
       code: 'getItem( { bloodType: "AB Positive" } )',
       output: 'getItem({ bloodType: "AB Positive" })',
       errors: [
-        { messageId: "rejectedOpeningSpace", line: 1, column: 8 },
-        { messageId: "rejectedClosingSpace", line: 1, column: 39 },
-      ]
+        { messageId: 'rejectedOpeningSpace', column: 8 },
+        { messageId: 'rejectedClosingSpace', column: 39 },
+      ],
     },
     {
       code: 'getItem(a, b)',
       output: 'getItem( a, b )',
       errors: [
-        { messageId: "missingOpeningSpace", line: 1, column: 8 },
-        { messageId: "missingClosingSpace", line: 1, column: 13 },
-      ]
+        { messageId: 'missingOpeningSpace', column: 8 },
+        { messageId: 'missingClosingSpace', column: 13 },
+      ],
     },
     {
       code: 'new Item(a, b)',
       output: 'new Item( a, b )',
       errors: [
-        { messageId: "missingOpeningSpace", line: 1, column: 9 },
-        { messageId: "missingClosingSpace", line: 1, column: 14 },
-      ]
+        { messageId: 'missingOpeningSpace', column: 9 },
+        { messageId: 'missingClosingSpace', column: 14 },
+      ],
     },
     {
       code: 'getItem(element)',
       output: 'getItem( element )',
       errors: [
-        { messageId: "missingOpeningSpace", line: 1, column: 8 },
-        { messageId: "missingClosingSpace", line: 1, column: 16 },
-      ]
+        { messageId: 'missingOpeningSpace', column: 8 },
+        { messageId: 'missingClosingSpace', column: 16 },
+      ],
     },
     {
       code: 'getItem([ x, y ], [ u, w ])',
       output: 'getItem( [ x, y ], [ u, w ] )',
       errors: [
-        { messageId: "missingOpeningSpace", line: 1, column: 8 },
-        { messageId: "missingClosingSpace", line: 1, column: 27 },
-      ]
+        { messageId: 'missingOpeningSpace', column: 8 },
+        { messageId: 'missingClosingSpace', column: 27 },
+      ],
     },
     {
       code: '(1 + 2)',
       output: '( 1 + 2 )',
       errors: [
-        { messageId: "missingOpeningSpace", line: 1, column: 1 },
-        { messageId: "missingClosingSpace", line: 1, column: 7 },
-      ]
+        { messageId: 'missingOpeningSpace', column: 1 },
+        { messageId: 'missingClosingSpace', column: 7 },
+      ],
     },
   ],
 } );

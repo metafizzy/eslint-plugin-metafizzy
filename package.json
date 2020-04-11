@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node test/"
+    "test": "npm run lint && node test/",
+    "lint": "eslint ."
   },
   "keywords": [],
   "author": "",

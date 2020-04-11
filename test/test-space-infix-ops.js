@@ -37,8 +37,8 @@ tester.run( 'space-infix-ops', rule, {
     'a ? b : c',
 
     // AssignmentPattern
-    { parserOptions: { ecmaVersion: 6 }, code: "var { a = 0 } = bar;" },
-    { parserOptions: { ecmaVersion: 6 }, code: "function foo( a = 0 ) {}" },
+    { code: 'var { a = 0 } = bar;', parserOptions: { ecmaVersion: 6 } },
+    { code: 'function foo( a = 0 ) {}', parserOptions: { ecmaVersion: 6 } },
   ],
   invalid: [
     {
@@ -95,7 +95,8 @@ tester.run( 'space-infix-ops', rule, {
       code: 'a?b:c',
       output: 'a ? b : c',
       errors: getBeforeAfterErrors( 'missing', '?', 2 ).concat(
-        getBeforeAfterErrors( 'missing', ':', 4 ) ),
+          getBeforeAfterErrors( 'missing', ':', 4 ),
+      ),
     },
     // AssignmentPattern
     {

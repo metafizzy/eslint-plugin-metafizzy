@@ -4,10 +4,9 @@ function create( context ) {
 
   function checkOperator( node, leftNode, operatorValue, rightNode ) {
     let operator = sourceCode.getFirstTokenBetween( leftNode, rightNode,
-      function( token ) {
-        return token.value == operatorValue;
-      }
-    );
+        function( token ) {
+          return token.value == operatorValue;
+        } );
 
     let before = sourceCode.getTokenBefore( operator );
     let after = sourceCode.getTokenAfter( operator );
@@ -16,15 +15,16 @@ function create( context ) {
 
     let isMultiplyDivide = node.type == 'BinaryExpression' &&
       [ '/', '*' ].includes( operatorValue );
-    let isSingularMultiplyDivide =  isMultiplyDivide && getIsSingular( leftNode ) &&
+    let isSingularMultiplyDivide = isMultiplyDivide && getIsSingular( leftNode ) &&
       getIsSingular( rightNode );
 
     function report( options ) {
-      context.report( Object.assign( {
+      context.report( {
+        ...options,
         node: node,
         data: { operator: operatorValue },
         loc: operator.loc,
-      }, options ) );
+      } );
     }
 
     if ( isSingularMultiplyDivide ) {
@@ -33,7 +33,7 @@ function create( context ) {
           messageId: 'unexpectedSpaceBefore',
           fix: function( fixer ) {
             return fixer.removeRange([ before.range[1], operator.range[0] ]);
-          }
+          },
         });
       }
       if ( hasSpaceAfter ) {
@@ -41,7 +41,7 @@ function create( context ) {
           messageId: 'unexpectedSpaceAfter',
           fix: function( fixer ) {
             return fixer.removeRange([ operator.range[1], after.range[0] ]);
-          }
+          },
         });
       }
     } else {
@@ -51,7 +51,7 @@ function create( context ) {
           messageId: 'missingSpaceBefore',
           fix: function( fixer ) {
             return fixer.insertTextBefore( operator, ' ' );
-          }
+          },
         });
       }
       if ( !hasSpaceAfter ) {
@@ -59,7 +59,7 @@ function create( context ) {
           messageId: 'missingSpaceAfter',
           fix: function( fixer ) {
             return fixer.insertTextAfter( operator, ' ' );
-          }
+          },
         });
       }
 
@@ -114,7 +114,7 @@ module.exports = {
       missingSpaceBefore: 'Space missing before `{{operator}}`',
       missingSpaceAfter: 'Space missing after `{{operator}}`',
       unexpectedSpaceBefore: 'Unexpected space before `{{operator}}`',
-      unexpectedSpaceAfter: 'Unexpected space after `{{operator}}`'
+      unexpectedSpaceAfter: 'Unexpected space after `{{operator}}`',
     },
   },
 

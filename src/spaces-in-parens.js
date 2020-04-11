@@ -5,6 +5,7 @@ function create( context ) {
   function reportProgram( node ) {
 
     let tokens = sourceCode.tokensAndComments;
+    /* eslint complexity: [ "error", 20 ] */
     sourceCode.tokensAndComments.forEach( function( token, i ) {
       let isOpeningParen = getIsOpeningParen( token );
       if ( !isOpeningParen ) {
@@ -25,7 +26,7 @@ function create( context ) {
             messageId: 'rejectedOpeningSpace',
             fix: function( fixer ) {
               return fixer.removeRange([ openParen.range[1], closeParen.range[0] ]);
-            }
+            },
           });
         }
         return;
@@ -46,8 +47,8 @@ function create( context ) {
       }
 
       let hasOpeningSpace = sourceCode.isSpaceBetweenTokens( openParen, nextToken );
-      let hasClosingSpace = sourceCode.isSpaceBetweenTokens(
-          penultimateToken, closeParen );
+      let hasClosingSpace = sourceCode.isSpaceBetweenTokens( penultimateToken,
+          closeParen );
 
       // check for single string next
       if ( isSingleString || isSingleBracer ) {
@@ -59,7 +60,7 @@ function create( context ) {
             messageId: 'rejectedOpeningSpace',
             fix: function( fixer ) {
               return fixer.removeRange([ openParen.range[1], nextToken.range[0] ]);
-            }
+            },
           });
         }
 
@@ -69,31 +70,31 @@ function create( context ) {
             loc: closeParen.loc,
             messageId: 'rejectedClosingSpace',
             fix: function( fixer ) {
-              return fixer.removeRange([ penultimateToken.range[1], closeParen.range[0] ]);
-            }
+              return fixer.removeRange([ penultimateToken.range[1],
+                closeParen.range[0] ]);
+            },
           });
         }
-        return;
       } else {
         // everything else require spaces
         if ( !hasOpeningSpace ) {
           context.report({
             node: node,
             loc: openParen.loc,
-            messageId: "missingOpeningSpace",
+            messageId: 'missingOpeningSpace',
             fix: function( fixer ) {
               return fixer.insertTextAfter( openParen, ' ' );
-            }
+            },
           });
         }
         if ( !hasClosingSpace ) {
           context.report({
             node: node,
             loc: closeParen.loc,
-            messageId: "missingClosingSpace",
+            messageId: 'missingClosingSpace',
             fix: function( fixer ) {
               return fixer.insertTextAfter( penultimateToken, ' ');
-            }
+            },
           });
         }
       }
@@ -121,9 +122,9 @@ function getMatchingClosingBrace( token, tokens ) {
   let openCount = 1;
 
   for ( var i = index; i < tokens.length; i++ ) {
-    let token = tokens[i];
-    let isOpeningBrace = token.type == 'Punctuator' && token.value == openChar;
-    let isClosingBrace = token.type == 'Punctuator' && token.value == closeChar;
+    let nextToken = tokens[i];
+    let isOpeningBrace = nextToken.type == 'Punctuator' && nextToken.value == openChar;
+    let isClosingBrace = nextToken.type == 'Punctuator' && nextToken.value == closeChar;
     if ( isOpeningBrace ) {
       openCount++;
     } else if ( isClosingBrace ) {
@@ -131,27 +132,27 @@ function getMatchingClosingBrace( token, tokens ) {
     }
 
     if ( openCount == 0 ) {
-      return token;
+      return nextToken;
     }
   }
 }
 
 module.exports = {
   meta: {
-    type: "layout",
+    type: 'layout',
     fixable: 'whitespace',
 
     docs: {
-      description: "enforce consistent spacing inside parentheses",
-      category: "Stylistic Issues",
+      description: 'enforce consistent spacing inside parentheses',
+      category: 'Stylistic Issues',
       recommended: false,
     },
 
     messages: {
-      missingOpeningSpace: "There must be a space after this paren.",
-      missingClosingSpace: "There must be a space before this paren.",
-      rejectedOpeningSpace: "There should be no space after this paren.",
-      rejectedClosingSpace: "There should be no space before this paren."
+      missingOpeningSpace: 'There must be a space after this paren.',
+      missingClosingSpace: 'There must be a space before this paren.',
+      rejectedOpeningSpace: 'There should be no space after this paren.',
+      rejectedClosingSpace: 'There should be no space before this paren.',
     },
   },
 

@@ -1,29 +1,24 @@
 const { RuleTester } = require('eslint');
 
+/* eslint-disable-next-line no-unused-vars */
 function create( context ) {
   return {
     VariableDeclarator: function( node ) {
       console.log( node );
-    }
+    },
   };
 }
 
 const rule = {
   meta: {
-    type: "layout",
+    type: 'layout',
     fixable: 'whitespace',
 
-    docs: {
-      description: "enforce consistent spacing inside parentheses",
-      category: "Stylistic Issues",
-      recommended: false,
-    },
-
     messages: {
-      missingOpeningSpace: "There must be a space after this paren.",
-      missingClosingSpace: "There must be a space before this paren.",
-      rejectedOpeningSpace: "There should be no space after this paren.",
-      rejectedClosingSpace: "There should be no space before this paren."
+      missingOpeningSpace: 'There must be a space after this paren.',
+      missingClosingSpace: 'There must be a space before this paren.',
+      rejectedOpeningSpace: 'There should be no space after this paren.',
+      rejectedClosingSpace: 'There should be no space before this paren.',
     },
   },
 
@@ -33,7 +28,7 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    'var a = b'
+    'var a = b',
   ],
   invalid: [],
 } );
