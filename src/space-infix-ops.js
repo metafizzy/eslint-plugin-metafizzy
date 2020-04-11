@@ -13,9 +13,8 @@ function create( context ) {
     let hasSpaceBefore = sourceCode.isSpaceBetweenTokens( before, operator );
     let hasSpaceAfter = sourceCode.isSpaceBetweenTokens( operator, after );
 
-    let isMultiplyDivide = node.type == 'BinaryExpression' &&
-      [ '/', '*' ].includes( operatorValue );
-    let isSingularMultiplyDivide = isMultiplyDivide && getIsSingular( leftNode ) &&
+    let isDivide = node.type == 'BinaryExpression' && operatorValue == '/';
+    let isSingularDivide = isDivide && getIsSingular( leftNode ) &&
       getIsSingular( rightNode );
 
     function report( options ) {
@@ -27,7 +26,7 @@ function create( context ) {
       } );
     }
 
-    if ( isSingularMultiplyDivide ) {
+    if ( isSingularDivide ) {
       if ( hasSpaceBefore ) {
         report({
           messageId: 'unexpectedSpaceBefore',

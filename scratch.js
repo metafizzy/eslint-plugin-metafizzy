@@ -3,7 +3,7 @@ const { RuleTester } = require('eslint');
 /* eslint-disable-next-line no-unused-vars */
 function create( context ) {
   return {
-    VariableDeclarator: function( node ) {
+    BinaryExpression: function( node ) {
       console.log( node );
     },
   };
@@ -28,7 +28,7 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    'var a;',
+    'a*b*c',
   ],
   invalid: [],
 } );

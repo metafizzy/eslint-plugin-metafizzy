@@ -17,10 +17,9 @@ tester.run( 'space-infix-ops', rule, {
     'a + b',
     'Math.PI / 4',
 
-    // BinaryExpression, multiply/divide exception
+    // BinaryExpression, divide exception
     '1/12',
     'TAU/4',
-    'PI*2',
 
     // LogicalExpression
     'a || b',
@@ -64,11 +63,6 @@ tester.run( 'space-infix-ops', rule, {
       code: 'TAU / 4',
       output: 'TAU/4',
       errors: getBeforeAfterErrors( 'unexpected', '/', 5 ),
-    },
-    {
-      code: 'TAU * 2',
-      output: 'TAU*2',
-      errors: getBeforeAfterErrors( 'unexpected', '*', 5 ),
     },
     // LogicalExpression
     {
