@@ -14,7 +14,7 @@ function create( context ) {
     let hasSpaceAfter = sourceCode.isSpaceBetweenTokens( operator, after );
 
     let isDivide = node.type == 'BinaryExpression' && operatorValue == '/';
-    let isSingularDivide = isDivide && getIsSingular( leftNode ) &&
+    let isSingularDivide = isDivide && getIsLeftSingular( leftNode ) &&
       getIsSingular( rightNode );
 
     function report( options ) {
@@ -100,6 +100,15 @@ function create( context ) {
 
 function getIsSingular( node ) {
   return [ 'Literal', 'Identifier' ].includes( node.type );
+}
+
+function getIsLeftSingular( node ) {
+  let isSingular = getIsSingular( node );
+  if ( isSingular ) {
+    return isSingular;
+  }
+  // check if left node is a binary expression for: `a * b/c`
+  return node.type == 'BinaryExpression' && getIsSingular( node.right );
 }
 
 module.exports = {

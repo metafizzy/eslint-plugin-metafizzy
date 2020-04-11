@@ -20,6 +20,7 @@ tester.run( 'space-infix-ops', rule, {
     // BinaryExpression, divide exception
     '1/12',
     'TAU/4',
+    'TAU * 2/3',
 
     // LogicalExpression
     'a || b',
@@ -63,6 +64,18 @@ tester.run( 'space-infix-ops', rule, {
       code: 'TAU / 4',
       output: 'TAU/4',
       errors: getBeforeAfterErrors( 'unexpected', '/', 5 ),
+    },
+    {
+      code: 'TAU*2',
+      output: 'TAU * 2',
+      errors: getBeforeAfterErrors( 'missing', '*', 4 ),
+    },
+    {
+      code: 'TAU*2 / 3',
+      output: 'TAU * 2/3',
+      errors: getBeforeAfterErrors( 'missing', '*', 4 ).concat(
+          getBeforeAfterErrors( 'unexpected', '/', 7 ),
+      ),
     },
     // LogicalExpression
     {

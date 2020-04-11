@@ -28,7 +28,7 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    'a*b*c',
+    'TAU * 2/5',
   ],
   invalid: [],
 } );
