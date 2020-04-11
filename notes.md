@@ -4,7 +4,7 @@
   <!-- ConditionalExpression -->
   <!-- VariableDeclarator -->
 
-better messages with data for: computed-property-spacing and space-in-parens
+<!-- better messages with data for: computed-property-spacing and space-in-parens -->
 
 <!-- eslint src -->
 

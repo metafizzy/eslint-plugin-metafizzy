@@ -20,40 +20,40 @@ tester.run( 'computed-property-spacing', rule, {
       code: 'items[ "hydrogen" ]',
       output: 'items["hydrogen"]',
       errors: [
-        { messageId: 'rejectedOpeningSpace', line: 1, column: 6 },
-        { messageId: 'rejectedClosingSpace', line: 1, column: 19 },
+        { messageId: 'unexpectedOpeningSpace', column: 6 },
+        { messageId: 'unexpectedClosingSpace', column: 19 },
       ],
     },
     {
       code: 'items[ 1 ]',
       output: 'items[1]',
       errors: [
-        { messageId: 'rejectedOpeningSpace', line: 1, column: 6 },
-        { messageId: 'rejectedClosingSpace', line: 1, column: 10 },
+        { messageId: 'unexpectedOpeningSpace', column: 6 },
+        { messageId: 'unexpectedClosingSpace', column: 10 },
       ],
     },
     {
       code: 'items[ i ]',
       output: 'items[i]',
       errors: [
-        { messageId: 'rejectedOpeningSpace', line: 1, column: 6 },
-        { messageId: 'rejectedClosingSpace', line: 1, column: 10 },
+        { messageId: 'unexpectedOpeningSpace', column: 6 },
+        { messageId: 'unexpectedClosingSpace', column: 10 },
       ],
     },
     {
       code: 'items[index]',
       output: 'items[ index ]',
       errors: [
-        { messageId: 'missingOpeningSpace', line: 1, column: 6 },
-        { messageId: 'missingClosingSpace', line: 1, column: 12 },
+        { messageId: 'missingOpeningSpace', column: 6 },
+        { messageId: 'missingClosingSpace', column: 12 },
       ],
     },
     {
       code: 'items[10 + 4]',
       output: 'items[ 10 + 4 ]',
       errors: [
-        { messageId: 'missingOpeningSpace', line: 1, column: 6 },
-        { messageId: 'missingClosingSpace', line: 1, column: 13 },
+        { messageId: 'missingOpeningSpace', column: 6 },
+        { messageId: 'missingClosingSpace', column: 13 },
       ],
     },
   ],

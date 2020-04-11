@@ -21,7 +21,7 @@ function create( context ) {
         context.report({
           node: node,
           loc: openBracket.loc,
-          messageId: 'rejectedOpeningSpace',
+          messageId: 'unexpectedOpeningSpace',
           fix: function( fixer ) {
             return fixer.removeRange([ openBracket.range[1], property.range[0] ]);
           },
@@ -31,7 +31,7 @@ function create( context ) {
         context.report({
           node: node,
           loc: closeBracket.loc,
-          messageId: 'rejectedClosingSpace',
+          messageId: 'unexpectedClosingSpace',
           fix: function( fixer ) {
             return fixer.removeRange([ property.range[1], closeBracket.range[0] ]);
           },
@@ -83,10 +83,10 @@ module.exports = {
     },
 
     messages: {
-      missingOpeningSpace: 'There must be a space after this bracket.',
-      missingClosingSpace: 'There must be a space before this bracket.',
-      rejectedOpeningSpace: 'There should be no space after this bracket.',
-      rejectedClosingSpace: 'There should be no space before this bracket.',
+      missingOpeningSpace: 'Space missing after opening bracket `[`',
+      missingClosingSpace: 'Space missing before closing bracket `]`',
+      unexpectedOpeningSpace: 'Unexpected space after opening bracket `[`',
+      unexpectedClosingSpace: 'Unexpected space before closing bracket `]`',
     },
   },
 

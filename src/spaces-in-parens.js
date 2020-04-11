@@ -23,7 +23,7 @@ function create( context ) {
           context.report({
             node: node,
             loc: openParen.loc,
-            messageId: 'rejectedOpeningSpace',
+            messageId: 'unexpectedOpeningSpace',
             fix: function( fixer ) {
               return fixer.removeRange([ openParen.range[1], closeParen.range[0] ]);
             },
@@ -57,7 +57,7 @@ function create( context ) {
           context.report({
             node: node,
             loc: openParen.loc,
-            messageId: 'rejectedOpeningSpace',
+            messageId: 'unexpectedOpeningSpace',
             fix: function( fixer ) {
               return fixer.removeRange([ openParen.range[1], nextToken.range[0] ]);
             },
@@ -68,7 +68,7 @@ function create( context ) {
           context.report({
             node: node,
             loc: closeParen.loc,
-            messageId: 'rejectedClosingSpace',
+            messageId: 'unexpectedClosingSpace',
             fix: function( fixer ) {
               return fixer.removeRange([ penultimateToken.range[1],
                 closeParen.range[0] ]);
@@ -149,10 +149,10 @@ module.exports = {
     },
 
     messages: {
-      missingOpeningSpace: 'There must be a space after this paren.',
-      missingClosingSpace: 'There must be a space before this paren.',
-      rejectedOpeningSpace: 'There should be no space after this paren.',
-      rejectedClosingSpace: 'There should be no space before this paren.',
+      missingOpeningSpace: 'Space missing after opening paren `(`',
+      missingClosingSpace: 'Space missing before closing paren `)`',
+      unexpectedOpeningSpace: 'Unexpected space after opening paren `(`',
+      unexpectedClosingSpace: 'Unexpected space before closing paren `)`',
     },
   },
 

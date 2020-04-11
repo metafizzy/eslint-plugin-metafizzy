@@ -27,39 +27,39 @@ tester.run( 'spaces-in-parens', rule, {
       code: 'getItem( )',
       output: 'getItem()',
       errors: [
-        { messageId: 'rejectedOpeningSpace', column: 8 },
+        { messageId: 'unexpectedOpeningSpace', column: 8 },
       ],
     },
     {
       code: 'getItem( "hydrogen" )',
       output: 'getItem("hydrogen")',
       errors: [
-        { messageId: 'rejectedOpeningSpace', column: 8 },
-        { messageId: 'rejectedClosingSpace', column: 21 },
+        { messageId: 'unexpectedOpeningSpace', column: 8 },
+        { messageId: 'unexpectedClosingSpace', column: 21 },
       ],
     },
     {
       code: 'new Item( "hydrogen" )',
       output: 'new Item("hydrogen")',
       errors: [
-        { messageId: 'rejectedOpeningSpace', column: 9 },
-        { messageId: 'rejectedClosingSpace', column: 22 },
+        { messageId: 'unexpectedOpeningSpace', column: 9 },
+        { messageId: 'unexpectedClosingSpace', column: 22 },
       ],
     },
     {
       code: 'getItem( [ x, y ] )',
       output: 'getItem([ x, y ])',
       errors: [
-        { messageId: 'rejectedOpeningSpace', column: 8 },
-        { messageId: 'rejectedClosingSpace', column: 19 },
+        { messageId: 'unexpectedOpeningSpace', column: 8 },
+        { messageId: 'unexpectedClosingSpace', column: 19 },
       ],
     },
     {
       code: 'getItem( { bloodType: "AB Positive" } )',
       output: 'getItem({ bloodType: "AB Positive" })',
       errors: [
-        { messageId: 'rejectedOpeningSpace', column: 8 },
-        { messageId: 'rejectedClosingSpace', column: 39 },
+        { messageId: 'unexpectedOpeningSpace', column: 8 },
+        { messageId: 'unexpectedClosingSpace', column: 39 },
       ],
     },
     {
