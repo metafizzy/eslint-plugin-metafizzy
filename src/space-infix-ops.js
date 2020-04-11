@@ -99,7 +99,8 @@ function create( context ) {
 }
 
 function getIsSingular( node ) {
-  return [ 'Literal', 'Identifier' ].includes( node.type );
+  return [ 'Literal', 'Identifier' ].includes( node.type ) ||
+    ( node.type == 'UnaryExpression' && getIsSingular( node.argument ) );
 }
 
 function getIsLeftSingular( node ) {

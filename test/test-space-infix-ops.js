@@ -21,6 +21,7 @@ tester.run( 'space-infix-ops', rule, {
     '1/12',
     'TAU/4',
     'TAU * 2/3',
+    '2/-3',
 
     // LogicalExpression
     'a || b',
@@ -69,6 +70,11 @@ tester.run( 'space-infix-ops', rule, {
       code: 'TAU*2',
       output: 'TAU * 2',
       errors: getBeforeAfterErrors( 'missing', '*', 4 ),
+    },
+    {
+      code: '2 / -3',
+      output: '2/-3',
+      errors: getBeforeAfterErrors( 'unexpected', '/', 3 ),
     },
     {
       code: 'TAU*2 / 3',
