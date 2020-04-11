@@ -14,11 +14,23 @@
   ],
   "author": "David DeSandro",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "eslint": "^6.8.0",
     "jshint": "^2.11.0"
   },
   "peerDependencies": {
     "eslint": "^6.8.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metafizzy/eslint-plugin-metafizzy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/metafizzy/eslint-plugin-metafizzy/issues"
+  },
+  "homepage": "https://github.com/metafizzy/eslint-plugin-metafizzy#readme"
 }
