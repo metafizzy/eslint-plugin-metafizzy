@@ -28,7 +28,7 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    'var a = b',
+    'var a;',
   ],
   invalid: [],
 } );

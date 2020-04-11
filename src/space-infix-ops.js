@@ -72,6 +72,9 @@ function create( context ) {
   }
 
   function checkVar( node ) {
+    if ( !node.init ) {
+      return;
+    }
     let leftNode = node.id.typeAnnotation || node.id;
     checkOperator( node, leftNode, '=', node.init );
   }

@@ -6,21 +6,21 @@ let tester = new RuleTester();
 
 tester.run( 'spaces-in-parens', rule, {
   valid: [
-    { code: 'getItem()' },
-    { code: 'getItem("hydrogen")' },
-    { code: 'new Item("hydrogen")' },
-    { code: 'getItem([ x, y ])' },
-    { code: 'getItem({ bloodType: "AB Positive" })' },
-    { code: 'getItem({\nbloodType: "AB Positive"\n})' },
+    'getItem()',
+    'getItem("hydrogen")',
+    'new Item("hydrogen")',
+    'getItem([ x, y ])',
+    'getItem({ bloodType: "AB Positive" })',
+    'getItem({\nbloodType: "AB Positive"\n})',
 
-    { code: 'getItem( a, b )' },
-    { code: 'getItem(\na, b\n)' },
-    { code: 'getItem( element )' },
-    { code: 'new Item( a, b )' },
-    { code: 'new Item( element )' },
-    { code: 'getItem( [ x, y ], [ u, v ] )' },
+    'getItem( a, b )',
+    'getItem(\na, b\n)',
+    'getItem( element )',
+    'new Item( a, b )',
+    'new Item( element )',
+    'getItem( [ x, y ], [ u, v ] )',
 
-    { code: '( 1 + 2 )' },
+    '( 1 + 2 )',
   ],
   invalid: [
     {

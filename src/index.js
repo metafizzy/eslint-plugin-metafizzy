@@ -1,4 +1,4 @@
-const config = require('../.eslint.json');
+const config = require('../.eslintrc.json');
 
 config.rules = {
   ...config.rules,

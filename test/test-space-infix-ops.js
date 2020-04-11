@@ -29,6 +29,8 @@ tester.run( 'space-infix-ops', rule, {
     // VariableDeclarator
     'var a = b',
     'var a = b, c = d',
+    'var a',
+    'for ( var prop in obj ) {}',
 
     // AssignmentExpression
     'a += 1',
@@ -39,6 +41,7 @@ tester.run( 'space-infix-ops', rule, {
     // AssignmentPattern
     { code: 'var { a = 0 } = bar;', parserOptions: { ecmaVersion: 6 } },
     { code: 'function foo( a = 0 ) {}', parserOptions: { ecmaVersion: 6 } },
+
   ],
   invalid: [
     {
