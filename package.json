@@ -1,17 +1,24 @@
 {
-  "name": "eslint-fizzy",
+  "name": "eslint-plugin-metafizzy",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "ESLint config for Metafizzy",
+  "main": "src/index.js",
   "scripts": {
     "test": "npm run lint && node test/",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lintFix": "eslint . --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
+  "keywords": [
+    "eslint",
+    "eslintplugin"
+  ],
+  "author": "David DeSandro",
+  "license": "MIT",
+  "devDependencies": {
     "eslint": "^6.8.0",
     "jshint": "^2.11.0"
+  },
+  "peerDependencies": {
+    "eslint": "^6.8.0"
   }
 }

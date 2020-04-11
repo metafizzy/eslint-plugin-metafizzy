@@ -6,4 +6,6 @@
 
 better messages with data for: computed-property-spacing and space-in-parens
 
-eslint src
+<!-- eslint src -->
+
+README

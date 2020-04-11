@@ -8,10 +8,6 @@
     "ecmaVersion": 2018
   },
   "globals": {
-    "CubNPup": "readonly",
-    "EvEmitter": "readonly",
-    "TAU": "readonly",
-    "Unipointer": "readonly"
   },
   "rules": {
     "accessor-pairs": "error",
