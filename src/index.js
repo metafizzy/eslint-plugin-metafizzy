@@ -1,7 +1,7 @@
-const config = require('../.eslintrc.json');
+const baseConfig = require('./eslintrc.js');
 
-config.rules = {
-  ...config.rules,
+baseConfig.rules = {
+  ...baseConfig.rules,
   'metafizzy/computed-property-spacing': 'error',
   'metafizzy/space-infix-ops': 'error',
   'metafizzy/spaces-in-parens': 'error',
@@ -14,6 +14,30 @@ module.exports = {
     'spaces-in-parens': require('./spaces-in-parens.js'),
   },
   configs: {
-    standard: config,
+    base: baseConfig,
+
+    browser: {
+      ...baseConfig,
+      env: {
+        ...baseConfig.env,
+        browser: true,
+      },
+    },
+
+    node: {
+      ...baseConfig,
+      env: {
+        ...baseConfig.env,
+        node: true,
+      },
+      parserOptions: {
+        ...baseConfig.parseOptions,
+        ecmaVersion: 2019,
+      },
+      rules: {
+        ...baseConfig.rules,
+        'prefer-object-spread': 'error',
+      },
+    },
   },
 };
