@@ -201,7 +201,7 @@ module.exports = {
     'space-before-blocks': 'error',
     'space-before-function-paren': [ 'error', 'never' ],
     'space-in-parens': 'off',
-    'space-infix-ops': [ 'error' ],
+    'space-infix-ops': 'off',
     'space-unary-ops': 'error',
     'spaced-comment': [ 'error', 'always' ],
     strict: [ 'error', 'never' ],
