@@ -21,6 +21,7 @@ module.exports = {
     'block-spacing': 'error',
     'brace-style': [ 'error', '1tbs' ],
     camelcase: 'error',
+    'callback-return': 'error',
     'class-methods-use-this': 'error',
     'comma-dangle': [ 'error', 'always-multiline' ],
     'comma-spacing': 'error',
@@ -39,6 +40,7 @@ module.exports = {
     'func-style': [ 'error', 'declaration' ],
     'function-paren-newline': [ 'error', 'consistent' ],
     'generator-star-spacing': 'error',
+    'handle-callback-err': 'error',
     'id-blacklist': [ 'error', 'callback' ],
     'id-length': [ 'error', {
       min: 2,
@@ -65,6 +67,9 @@ module.exports = {
     'max-depth': 'error',
     'max-len': [ 'error', {
       code: 90,
+    } ],
+    'max-params': [ 'error', {
+      max: 4,
     } ],
     'max-nested-callbacks': 'error',
     'max-statements-per-line': 'error',
@@ -162,7 +167,7 @@ module.exports = {
     'no-useless-constructor': 'error',
     'no-useless-rename': 'error',
     'no-useless-return': 'error',
-    'no-var': 'off',
+    'no-var': 'error',
     'no-void': 'error',
     'no-warning-comments': 'off',
     'no-whitespace-before-property': 'error',
@@ -172,6 +177,7 @@ module.exports = {
     'object-curly-spacing': [ 'error', 'always' ],
     'one-var': [ 'error', {
       initialized: 'never',
+      uninitialized: 'consecutive',
     } ],
     'one-var-declaration-per-line': [ 'error', 'initializations' ],
     'operator-assignment': 'error',
@@ -203,7 +209,9 @@ module.exports = {
     'space-in-parens': 'off',
     'space-infix-ops': 'off',
     'space-unary-ops': 'error',
-    'spaced-comment': [ 'error', 'always' ],
+    'spaced-comment': [ 'error', 'always', {
+      exceptions: [ '-', '!' ],
+    } ],
     strict: [ 'error', 'never' ],
     'switch-colon-spacing': 'error',
     'symbol-description': 'error',

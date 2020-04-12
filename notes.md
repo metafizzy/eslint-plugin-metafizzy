@@ -9,3 +9,11 @@
 <!-- eslint src -->
 
 README
+
+
+**spaces in parens**
+
+    function(/* stubbedParam */) {}
+
+    tester.run('string', rule, {
+    });

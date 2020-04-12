@@ -121,8 +121,7 @@ function getMatchingClosingBrace( token, tokens ) {
   let index = tokens.indexOf( token ) + 1;
   let openCount = 1;
 
-  for ( var i = index; i < tokens.length; i++ ) {
-    let nextToken = tokens[i];
+  for ( let nextToken of tokens.slice( index ) ) {
     let isOpeningBrace = nextToken.type == 'Punctuator' && nextToken.value == openChar;
     let isClosingBrace = nextToken.type == 'Punctuator' && nextToken.value == closeChar;
     if ( isOpeningBrace ) {
