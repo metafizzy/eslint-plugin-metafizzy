@@ -34,7 +34,8 @@ function create( context ) {
 
       let nextToken = sourceCode.getTokenAfter( openParen );
       let penultimateToken = sourceCode.getTokenBefore( closeParen );
-      let isSingleString = tokenDelta == 2 && nextToken.type == 'String';
+      let isSingleString = tokenDelta == 2 &&
+        [ 'String', 'Template' ].includes( nextToken.type );
 
       let isNextOpeningBrace = tokenDelta > 2 && nextToken.type == 'Punctuator' &&
       ( nextToken.value == '[' || nextToken.value == '{' );

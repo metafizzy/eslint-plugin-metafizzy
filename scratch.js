@@ -3,7 +3,7 @@ const { RuleTester } = require('eslint');
 /* eslint-disable-next-line no-unused-vars */
 function create( context ) {
   return {
-    BinaryExpression: function( node ) {
+    Program: function( node ) {
       console.log( node );
     },
   };
@@ -28,7 +28,7 @@ const rule = {
 let tester = new RuleTester();
 tester.run( 'scratch', rule, {
   valid: [
-    'TAU/-1',
+    'getItem(/* comment */)',
   ],
   invalid: [],
 } );

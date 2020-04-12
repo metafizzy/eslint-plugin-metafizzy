@@ -15,5 +15,3 @@ README
 
     function(/* stubbedParam */) {}
 
-    tester.run('string', rule, {
-    });

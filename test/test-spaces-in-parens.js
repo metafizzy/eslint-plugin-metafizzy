@@ -9,6 +9,9 @@ tester.run( 'spaces-in-parens', rule, {
     'getItem()',
     'getItem("hydrogen")',
     'new Item("hydrogen")',
+    { code: 'getItem(`hydrogen`)', parserOptions: { ecmaVersion: 6 } },
+    'getItem( "hydrogen", element )',
+
     'getItem([ x, y ])',
     'getItem({ bloodType: "AB Positive" })',
     'getItem({\nbloodType: "AB Positive"\n})',
@@ -44,6 +47,15 @@ tester.run( 'spaces-in-parens', rule, {
       errors: [
         { messageId: 'unexpectedOpeningSpace', column: 9 },
         { messageId: 'unexpectedClosingSpace', column: 22 },
+      ],
+    },
+    {
+      code: 'getItem( `hydrogen` )',
+      output: 'getItem(`hydrogen`)',
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        { messageId: 'unexpectedOpeningSpace', column: 8 },
+        { messageId: 'unexpectedClosingSpace', column: 21 },
       ],
     },
     {
