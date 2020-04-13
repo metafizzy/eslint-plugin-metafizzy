@@ -15,3 +15,4 @@ README
 
     function(/* stubbedParam */) {}
 
+**switch statement indents**
