@@ -9,6 +9,11 @@ module.exports = {
   },
   globals: {
   },
+  ignorePatterns: [
+    'build/',
+    'dist/',
+    '!.eslintrc.js',
+  ],
   rules: {
     'accessor-pairs': 'error',
     'array-bracket-spacing': [ 'error', 'always' ],
