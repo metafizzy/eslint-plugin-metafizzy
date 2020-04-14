@@ -116,17 +116,16 @@ module.exports = {
   meta: {
     type: 'layout',
     fixable: 'whitespace',
-
     docs: {
-      description: 'Enforce consistent spacing around operators',
+      description: 'enforce spacing around operators',
       category: 'Stylistic Issues',
     },
 
     messages: {
       missingSpaceBefore: 'Space missing before `{{operator}}`',
       missingSpaceAfter: 'Space missing after `{{operator}}`',
-      unexpectedSpaceBefore: 'Unexpected space before `{{operator}}`',
-      unexpectedSpaceAfter: 'Unexpected space after `{{operator}}`',
+      unexpectedSpaceBefore: 'Singular division values. Unexpected space before `/`',
+      unexpectedSpaceAfter: 'Singular division values. Unexpected space after `/`',
     },
   },
 

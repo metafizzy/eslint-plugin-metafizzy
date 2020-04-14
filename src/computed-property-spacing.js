@@ -76,17 +76,16 @@ module.exports = {
   meta: {
     type: 'layout',
     fixable: 'whitespace',
-
     docs: {
-      description: 'spacing inside computed property brackets',
+      description: 'enforce spacing inside computed property brackets',
       category: 'Stylistic Issues',
     },
 
     messages: {
       missingOpeningSpace: 'Space missing after opening bracket `[`',
       missingClosingSpace: 'Space missing before closing bracket `]`',
-      unexpectedOpeningSpace: 'Unexpected space after opening bracket `[`',
-      unexpectedClosingSpace: 'Unexpected space before closing bracket `]`',
+      unexpectedOpeningSpace: 'Singular value in brackets. Unexpected space after `[`',
+      unexpectedClosingSpace: 'Singular value in brackets. Unexpected space before `]`',
     },
   },
 

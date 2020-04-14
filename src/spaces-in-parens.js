@@ -141,18 +141,16 @@ module.exports = {
   meta: {
     type: 'layout',
     fixable: 'whitespace',
-
     docs: {
-      description: 'enforce consistent spacing inside parentheses',
+      description: 'enforce spacing inside parentheses',
       category: 'Stylistic Issues',
-      recommended: false,
     },
 
     messages: {
       missingOpeningSpace: 'Space missing after opening paren `(`',
       missingClosingSpace: 'Space missing before closing paren `)`',
-      unexpectedOpeningSpace: 'Unexpected space after opening paren `(`',
-      unexpectedClosingSpace: 'Unexpected space before closing paren `)`',
+      unexpectedOpeningSpace: 'Singular value in parens. Unexpected space after `(`',
+      unexpectedClosingSpace: 'Singular value in parens. Unexpected space before `)`',
     },
   },
 
