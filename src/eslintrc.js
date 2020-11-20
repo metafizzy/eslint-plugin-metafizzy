@@ -34,7 +34,7 @@ module.exports = {
     complexity: [ 'error', 12 ],
     'computed-property-spacing': 'off',
     'consistent-this': [ 'error', '_this' ],
-    curly: 'error',
+    curly: [ 'error', 'multi-line' ],
     'default-case': 'error',
     'dot-location': [ 'error', 'property' ],
     'dot-notation': 'error',

@@ -5,8 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "npm run lint && node test/",
-    "lint": "npx eslint .",
-    "lintFix": "npx eslint . --fix"
+    "lint": "npx eslint ."
   },
   "keywords": [
     "eslint",
