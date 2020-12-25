@@ -6,7 +6,7 @@ function create( context ) {
 
     let tokens = sourceCode.tokensAndComments;
     /* eslint complexity: [ "error", 20 ] */
-    sourceCode.tokensAndComments.forEach( function( token, i ) {
+    tokens.forEach( function( token, i ) {
       let isOpeningParen = getIsOpeningParen( token );
       if ( !isOpeningParen ) {
         return;
@@ -45,6 +45,12 @@ function create( context ) {
         // check for single array or object
         let closingBrace = getMatchingClosingBrace( nextToken, tokens );
         isSingleBracer = sourceCode.getTokenAfter( closingBrace ) == closeParen;
+      }
+
+      let isNextTemplate = tokenDelta > 2 && nextToken.type == 'Template';
+      if ( isNextTemplate ) {
+        let closingTemplate = getMatchingClosingTemplate( nextToken, tokens );
+        isSingleBracer = sourceCode.getTokenAfter( closingTemplate ) == closeParen;
       }
 
       let hasOpeningSpace = sourceCode.isSpaceBetweenTokens( openParen, nextToken );
@@ -116,15 +122,16 @@ const matchingClosingBraces = {
   '{': '}',
 };
 
-function getMatchingClosingBrace( token, tokens ) {
-  let openChar = token.value;
-  let closeChar = matchingClosingBraces[ token.value ];
-  let index = tokens.indexOf( token ) + 1;
+function getMatchingClosingBrace( openingToken, tokens ) {
+  let openChar = openingToken.value;
+  let closeChar = matchingClosingBraces[ openingToken.value ];
+  let index = tokens.indexOf( openingToken ) + 1;
+  let followingTokens = tokens.slice( index );
   let openCount = 1;
 
-  for ( let nextToken of tokens.slice( index ) ) {
-    let isOpeningBrace = nextToken.type == 'Punctuator' && nextToken.value == openChar;
-    let isClosingBrace = nextToken.type == 'Punctuator' && nextToken.value == closeChar;
+  for ( let token of followingTokens ) {
+    let isOpeningBrace = token.type == 'Punctuator' && token.value == openChar;
+    let isClosingBrace = token.type == 'Punctuator' && token.value == closeChar;
     if ( isOpeningBrace ) {
       openCount++;
     } else if ( isClosingBrace ) {
@@ -132,7 +139,27 @@ function getMatchingClosingBrace( token, tokens ) {
     }
 
     if ( openCount == 0 ) {
-      return nextToken;
+      return token;
+    }
+  }
+}
+
+function getMatchingClosingTemplate( openingToken, tokens ) {
+  let index = tokens.indexOf( openingToken ) + 1;
+  let followingTokens = tokens.slice( index );
+  let openCount = 1;
+
+  for ( let token of followingTokens ) {
+    let isOpeningTemplate = token.type == 'Template' && token.value.endsWith('${');
+    let isClosingTemplate = token.type == 'Template' && token.value.startsWith('}');
+    if ( isOpeningTemplate ) {
+      openCount++;
+    } else if ( isClosingTemplate ) {
+      openCount--;
+    }
+
+    if ( openCount == 0 ) {
+      return token;
     }
   }
 }

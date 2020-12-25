@@ -1,3 +1,5 @@
+/* eslint-disable no-template-curly-in-string */
+
 const { RuleTester } = require('eslint');
 
 const rule = require('../src/spaces-in-parens.js');
@@ -10,6 +12,10 @@ tester.run( 'spaces-in-parens', rule, {
     'getItem("hydrogen")',
     'new Item("hydrogen")',
     { code: 'getItem(`hydrogen`)', parserOptions: { ecmaVersion: 6 } },
+    {
+      code: 'console.log(`Hello ${recipient || "world"}`)',
+      parserOptions: { ecmaVersion: 6 },
+    },
     'getItem( "hydrogen", element )',
 
     'getItem([ x, y ])',
@@ -56,6 +62,15 @@ tester.run( 'spaces-in-parens', rule, {
       errors: [
         { messageId: 'unexpectedOpeningSpace', column: 8 },
         { messageId: 'unexpectedClosingSpace', column: 21 },
+      ],
+    },
+    {
+      code: 'console.log( `Hello ${recipient || "world"}` )',
+      output: 'console.log(`Hello ${recipient || "world"}`)',
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        { messageId: 'unexpectedOpeningSpace', column: 12 },
+        { messageId: 'unexpectedClosingSpace', column: 46 },
       ],
     },
     {
