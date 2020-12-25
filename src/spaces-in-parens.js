@@ -147,20 +147,10 @@ function getMatchingClosingBrace( openingToken, tokens ) {
 function getMatchingClosingTemplate( openingToken, tokens ) {
   let index = tokens.indexOf( openingToken ) + 1;
   let followingTokens = tokens.slice( index );
-  let openCount = 1;
 
   for ( let token of followingTokens ) {
-    let isOpeningTemplate = token.type == 'Template' && token.value.endsWith('${');
-    let isClosingTemplate = token.type == 'Template' && token.value.startsWith('}');
-    if ( isOpeningTemplate ) {
-      openCount++;
-    } else if ( isClosingTemplate ) {
-      openCount--;
-    }
-
-    if ( openCount == 0 ) {
-      return token;
-    }
+    let isClosingTemplate = token.type == 'Template' && token.value.endsWith('`');
+    if (isClosingTemplate) return token;
   }
 }
 

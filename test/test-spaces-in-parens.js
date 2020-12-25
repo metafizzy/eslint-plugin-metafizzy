@@ -16,6 +16,10 @@ tester.run( 'spaces-in-parens', rule, {
       code: 'console.log(`Hello ${recipient || "world"}`)',
       parserOptions: { ecmaVersion: 6 },
     },
+    {
+      code: 'execSync(`cat ${paths.join(" ")} > ${distPath}`)',
+      parserOptions: { ecmaVersion: 6 },
+    },
     'getItem( "hydrogen", element )',
 
     'getItem([ x, y ])',
@@ -71,6 +75,15 @@ tester.run( 'spaces-in-parens', rule, {
       errors: [
         { messageId: 'unexpectedOpeningSpace', column: 12 },
         { messageId: 'unexpectedClosingSpace', column: 46 },
+      ],
+    },
+    {
+      code: 'execSync( `cat ${paths.join(" ")} > ${distPath}` )',
+      output: 'execSync(`cat ${paths.join(" ")} > ${distPath}`)',
+      parserOptions: { ecmaVersion: 6 },
+      errors: [
+        { messageId: 'unexpectedOpeningSpace', column: 9 },
+        { messageId: 'unexpectedClosingSpace', column: 50 },
       ],
     },
     {
