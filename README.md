@@ -41,7 +41,7 @@ module.exports = {
 };
 ```
 
-Set [`extends`](https://eslint.org/docs/user-guide/configuring#using-the-configuration-from-a-plugin) to `plugin:metafizzy/configName` to use a plugin configuration. This plugin provies three configurations: `browser`, `node`, and `base`.
+Set [`extends`](https://eslint.org/docs/user-guide/configuring#using-the-configuration-from-a-plugin) to `plugin:metafizzy/configName` to use a plugin configuration. This plugin provides three configurations: `browser`, `node`, and `base`.
 
 ``` js
 // .eslintrc.js
