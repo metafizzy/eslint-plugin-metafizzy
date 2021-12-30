@@ -191,7 +191,7 @@ module.exports = {
     'padding-line-between-statements': 'error',
     'prefer-arrow-callback': 'off',
     'prefer-numeric-literals': 'error',
-    'prefer-object-spread': 'off',
+    'prefer-object-spread': 'error',
     'prefer-promise-reject-errors': 'error',
     'prefer-spread': 'error',
     'quote-props': [ 'error', 'as-needed' ],
