@@ -15,7 +15,7 @@ function create( context ) {
       let closeParen = getMatchingClosingBrace( token, tokens );
       let tokenDelta = tokens.indexOf( closeParen ) - i;
 
-      let isEmpty = tokenDelta == 1;
+      let isEmpty = tokenDelta === 1;
       // empty parens have no space
       if ( isEmpty ) {
         let hasSpace = sourceCode.isSpaceBetweenTokens( openParen, closeParen );
@@ -34,23 +34,23 @@ function create( context ) {
 
       let nextToken = sourceCode.getTokenAfter( openParen );
       let penultimateToken = sourceCode.getTokenBefore( closeParen );
-      let isSingleString = tokenDelta == 2 &&
+      let isSingleString = tokenDelta === 2 &&
         [ 'String', 'Template' ].includes( nextToken.type );
 
-      let isNextOpeningBrace = tokenDelta > 2 && nextToken.type == 'Punctuator' &&
-      ( nextToken.value == '[' || nextToken.value == '{' );
+      let isNextOpeningBrace = tokenDelta > 2 && nextToken.type === 'Punctuator' &&
+      ( nextToken.value === '[' || nextToken.value === '{' );
       let isSingleBracer;
 
       if ( isNextOpeningBrace ) {
         // check for single array or object
         let closingBrace = getMatchingClosingBrace( nextToken, tokens );
-        isSingleBracer = sourceCode.getTokenAfter( closingBrace ) == closeParen;
+        isSingleBracer = sourceCode.getTokenAfter( closingBrace ) === closeParen;
       }
 
-      let isNextTemplate = tokenDelta > 2 && nextToken.type == 'Template';
+      let isNextTemplate = tokenDelta > 2 && nextToken.type === 'Template';
       if ( isNextTemplate ) {
         let closingTemplate = getMatchingClosingTemplate( nextToken, tokens );
-        isSingleBracer = sourceCode.getTokenAfter( closingTemplate ) == closeParen;
+        isSingleBracer = sourceCode.getTokenAfter( closingTemplate ) === closeParen;
       }
 
       let hasOpeningSpace = sourceCode.isSpaceBetweenTokens( openParen, nextToken );
@@ -113,7 +113,7 @@ function create( context ) {
 }
 
 function getIsOpeningParen( token ) {
-  return token.type == 'Punctuator' && token.value == '(';
+  return token.type === 'Punctuator' && token.value === '(';
 }
 
 const matchingClosingBraces = {
@@ -130,17 +130,15 @@ function getMatchingClosingBrace( openingToken, tokens ) {
   let openCount = 1;
 
   for ( let token of followingTokens ) {
-    let isOpeningBrace = token.type == 'Punctuator' && token.value == openChar;
-    let isClosingBrace = token.type == 'Punctuator' && token.value == closeChar;
+    let isOpeningBrace = token.type === 'Punctuator' && token.value === openChar;
+    let isClosingBrace = token.type === 'Punctuator' && token.value === closeChar;
     if ( isOpeningBrace ) {
       openCount++;
     } else if ( isClosingBrace ) {
       openCount--;
     }
 
-    if ( openCount == 0 ) {
-      return token;
-    }
+    if ( openCount === 0 ) return token;
   }
 }
 
@@ -149,7 +147,7 @@ function getMatchingClosingTemplate( openingToken, tokens ) {
   let followingTokens = tokens.slice( index );
 
   for ( let token of followingTokens ) {
-    let isClosingTemplate = token.type == 'Template' && token.value.endsWith('`');
+    let isClosingTemplate = token.type === 'Template' && token.value.endsWith('`');
     if (isClosingTemplate) return token;
   }
 }

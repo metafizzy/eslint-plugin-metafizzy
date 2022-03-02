@@ -39,7 +39,7 @@ module.exports = {
     'dot-location': [ 'error', 'property' ],
     'dot-notation': 'error',
     'eol-last': 'error',
-    eqeqeq: 'off',
+    eqeqeq: [ 'error', 'smart' ],
     'func-call-spacing': 'error',
     'func-name-matching': 'error',
     'func-style': [ 'error', 'declaration' ],

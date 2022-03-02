@@ -5,7 +5,7 @@ function create( context ) {
   function checkOperator( node, leftNode, operatorValue, rightNode ) {
     let operator = sourceCode.getFirstTokenBetween( leftNode, rightNode,
         function( token ) {
-          return token.value == operatorValue;
+          return token.value === operatorValue;
         } );
 
     let before = sourceCode.getTokenBefore( operator );
@@ -13,7 +13,7 @@ function create( context ) {
     let hasSpaceBefore = sourceCode.isSpaceBetweenTokens( before, operator );
     let hasSpaceAfter = sourceCode.isSpaceBetweenTokens( operator, after );
 
-    let isDivide = node.type == 'BinaryExpression' && operatorValue == '/';
+    let isDivide = node.type === 'BinaryExpression' && operatorValue === '/';
     let isSingularDivide = isDivide && getIsLeftSingular( leftNode ) &&
       getIsSingular( rightNode );
 
@@ -100,7 +100,7 @@ function create( context ) {
 
 function getIsSingular( node ) {
   return [ 'Literal', 'Identifier' ].includes( node.type ) ||
-    ( node.type == 'UnaryExpression' && getIsSingular( node.argument ) );
+    ( node.type === 'UnaryExpression' && getIsSingular( node.argument ) );
 }
 
 function getIsLeftSingular( node ) {
@@ -109,7 +109,7 @@ function getIsLeftSingular( node ) {
     return isSingular;
   }
   // check if left node is a binary expression for: `a * b/c`
-  return node.type == 'BinaryExpression' && getIsSingular( node.right );
+  return node.type === 'BinaryExpression' && getIsSingular( node.right );
 }
 
 module.exports = {

@@ -12,10 +12,10 @@ function create( context ) {
     let hasOpeningSpace = sourceCode.isSpaceBetweenTokens( openBracket, property );
     let hasClosingSpace = sourceCode.isSpaceBetweenTokens( property, closeBracket );
 
-    let isSingleCharIdentifier = property.type == 'Identifier' &&
-      property.name.length == 1;
+    let isSingleCharIdentifier = property.type === 'Identifier' &&
+      property.name.length === 1;
 
-    if ( property.type == 'Literal' || isSingleCharIdentifier ) {
+    if ( property.type === 'Literal' || isSingleCharIdentifier ) {
       // Strings, Numbers, and single-character Identifiers like `i` reject spaces
       if ( hasOpeningSpace ) {
         context.report({
